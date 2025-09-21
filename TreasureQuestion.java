@@ -51,9 +51,55 @@ public class TreasureQuestion {
 
     @Override
     public String toString(){
-        return "Clue:" + clue+
-               "Options:" + Arrays.toString(options) +
-               "Correct Answer:" + correctAnswer +
-               "Treasure Location:" + treasureLocation;
+        String result="Clue:" + clue + "\nOptions:\n";
+        for (int i=0; i< options.length; i++){
+            result +=(i+1) + ". " + options[i] + "\n";
+        }
+        return result;
     }
-}
+    @Override
+    public boolean equals(Object obj){
+        if (obj instanceof TreasureQuestion){
+            TreasureQuestion other = (TreasureQuestion) (obj);
+            return clue.equals(other.clue) && 
+            Arrays.equals(options, other.options);
+        } else {
+          return false;
+        }
+    }
+    public boolean checkAnswer(String answer){
+        if(correctAnswer.equals(answer)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public static void main(String[] args){
+      Scanner scanner = new Scanner(System.in);
+
+      String clue = "I am a number, but when you add 'G' to me, I go away....What number am I? \n";
+      String[] options = {"Two", "One", "Zero"} ;
+      String correctAnswer = "One";
+      String treasureLocation = "PAST TIME";
+    
+
+      TreasureQuestion question = new TreasureQuestion(clue, options, correctAnswer, treasureLocation);
+
+      System.out.println(question);
+
+      System.out.print("Enter your answer: ");
+      String userAnswer = scanner.nextLine();
+
+      if(question.checkAnswer(userAnswer)){
+         System.out.println("Correct!! :))) The treasure is located at:" + question.getTreasureLocation());
+       }
+        else{
+            System.out.println("Wrong answer! You have an IQ of -256 :)");
+        }
+  
+       scanner.close();
+    
+     }
+ }
