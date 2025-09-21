@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.util.arrays;
+import java.util.Arrays;
 
 
 public class TreasureQuestion {
